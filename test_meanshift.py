@@ -27,7 +27,6 @@ if not ret:
     print("Can't read video")
     cap.release()
     exit()
-# first_frame_grayscale = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 # Initialize the variables for tracking
 ious = []

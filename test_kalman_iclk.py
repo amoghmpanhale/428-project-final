@@ -98,5 +98,5 @@ while True:
 cap.release()
 out.release()
 print_results(ious, fps_values, frame_count, ground_truth)
-plot_metrics(ious, fps_values, "ICLK")
+plot_metrics(ious, fps_values, "Kalman_ICLK")
 
