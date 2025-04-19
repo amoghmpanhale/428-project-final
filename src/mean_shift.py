@@ -99,7 +99,6 @@ class MeanShiftTracker:
             gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         # Extract the patch from the given frame as per equation 21
-        # TODO: for some reason the window size is weird. This is a stopgap measure. Understand why its weird.
         w_0, h_0 = self.window_size
         patch = cv2.getRectSubPix(gray_frame, (w_0, h_0), tuple(roi_center)).astype(np.float32)
 

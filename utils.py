@@ -3,7 +3,6 @@
 '''
 This script contains utility functions used in the tracker tests that are just common things done. 
 Some reference was taken to code from the labs and assignments.
-The AI tool Claude was also used to detect typos and provide comments for documentation.
 '''
 
 import cv2
