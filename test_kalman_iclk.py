@@ -1,18 +1,18 @@
-# test_iclk.py
+# test_kalman_iclk.py
 
 import cv2
 import numpy as np
 import time
-from src.mean_shift import MeanShiftTracker
 from src.iclk import InverseCompositionalLucasKanadeTracker
+from src.kl_discrete import DiscreteKalmanFilter
 from utils import *
 
 # Paths to data and outputs
 video_path = 'data/animaltrack/penguin_5.mp4'
-annotation_path = 'data/animaltrack/penguin_5_sliding.txt'
-output_video_path = 'iclk_tracked_video.mp4'
-iou_plot_path = 'iclk_iou.png'
-fps_plot_path = 'iclk_fps.png'
+annotation_path = 'data/animaltrack/penguin_5.txt'
+output_video_path = 'kalman_iclk_tracked_video.mp4'
+iou_plot_path = 'kalman_iclk_iou.png'
+fps_plot_path = 'kalman_iclk_fps.png'
 
 ground_truth = load_ground_truth(annotation_path)
 cap, out, W, H, fps = setup_video(video_path, output_video_path)
@@ -41,6 +41,11 @@ current_x, current_y = x, y
 # Initialize the inv comp lucas kanade tracker
 tracker = InverseCompositionalLucasKanadeTracker(template)
 
+
+# Initialize Kalman filter with the initial state
+dt = 1.0 / fps # The frequency based on the frames per second
+kalman = DiscreteKalmanFilter([x + w/2, y + h/2, 0, 0], dt) 
+
 # Loop over the frames in thew video
 while True:
     start_time = time.time() 
@@ -64,12 +69,25 @@ while True:
     current_x += motion_vector[0]
     current_y += motion_vector[1]
 
-    prediction_box = (current_x, current_y, w, h)
+    measurement = [current_x + w/2, current_y + h/2]
+    
+    # Update Kalman filter with new measurement
+    kalman.predict()
+    updated_state = kalman.update(measurement)
+
+    # Get Kalman position
+    kalman_x, kalman_y = updated_state[0], updated_state[1]
+    kalman_box = ((kalman_x - w/2), (kalman_y - h/2), w, h)
 
     # Get the ground truth for this frame and calculate the iou for it and draw it on the frame
     gt_box = ground_truth[frame_count]
-    ious.append(compute_iou(gt_box, prediction_box))
-    frame = draw_boxes(frame, prediction_box, gt_box)
+    ious.append(compute_iou(gt_box, kalman_box))
+    frame = draw_boxes(frame, kalman_box, gt_box)
+    
+    # Draw the ICLK box in blue
+    iclk_box = (int(current_x), int(current_y), w, h)
+    cv2.rectangle(frame, (int(current_x), int(current_y)), 
+                    (int(current_x + w), int(current_y + h)), (255, 0, 0), 2)
 
     # Save the frame and calculate FPS
     out.write(frame)

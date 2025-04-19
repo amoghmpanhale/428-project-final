@@ -1,16 +1,17 @@
-# test_mosse.py
+# test_kalman_mosse.py
 
 import cv2
 import numpy as np
 import time
+from src.kl_discrete import DiscreteKalmanFilter
 from utils import *
 
 # Paths to data and outputs
 video_path = 'data/animaltrack/penguin_5.mp4'
 annotation_path = 'data/animaltrack/penguin_5_sliding.txt'
-output_video_path = 'mosse_tracked_video.mp4'
-iou_plot_path = 'mosse_iou.png'
-fps_plot_path = 'mosse_fps.png'
+output_video_path = 'kalman_mosse_tracked_video.mp4'
+iou_plot_path = 'kalman_mosse_iou.png'
+fps_plot_path = 'kalman_mosse_fps.png'
 
 ground_truth = load_ground_truth(annotation_path)
 cap, out, W, H, fps = setup_video(video_path, output_video_path)
@@ -35,6 +36,10 @@ frame_count = 0
 tracker = cv2.legacy.TrackerMOSSE_create()
 success = tracker.init(frame, initial_box)
 
+# Initialize Kalman filter with the initial state
+dt = 1.0 / fps # The frequency based on the frames per second
+kalman = DiscreteKalmanFilter([x + w/2, y + h/2, 0, 0], dt) 
+
 # Loop over the frames in thew video
 while True:
     start_time = time.time() 
@@ -46,18 +51,31 @@ while True:
     # Update tracker and get the new current position
     success, current_box = tracker.update(frame)
     
-    if not success:
+    if success:
+        current_x, current_y, current_w, current_h = int(current_box[0]), int(current_box[1]), int(current_box[2]), int(current_box[3])
+        measurement = [current_x + current_w/2, current_y + current_h/2]
+    
+        # Update Kalman filter with new measurement
+        kalman.predict()
+        updated_state = kalman.update(measurement)
+    else:
         print(f"Tracking failed at frame {frame_count}")
-        continue
+        updated_state = kalman.predict()
 
-    current_x, current_y, current_w, current_h = int(current_box[0]), int(current_box[1]), int(current_box[2]), int(current_box[3])
-
-    prediction_box = (current_x, current_y, current_w, current_h)
+    # Get Kalman position
+    kalman_x, kalman_y = updated_state[0], updated_state[1]
+    kalman_box = ((kalman_x - w/2), (kalman_y - h/2), w, h)
 
     # Get the ground truth for this frame and calculate the iou for it and draw it on the frame
     gt_box = ground_truth[frame_count]
-    ious.append(compute_iou(gt_box, prediction_box))
-    frame = draw_boxes(frame, prediction_box, gt_box)
+    ious.append(compute_iou(gt_box, kalman_box))
+    frame = draw_boxes(frame, kalman_box, gt_box)
+    
+    # Draw the MOSSE box in blue
+    if success:
+        mosse_box = (current_x, current_y, current_w, current_h)
+        cv2.rectangle(frame, (current_x, current_y), 
+                    (current_x + current_w, current_y + current_h), (255, 0, 0), 2)
 
     # Save the frame and calculate FPS
     out.write(frame)
@@ -68,4 +86,4 @@ while True:
 cap.release()
 out.release()
 print_results(ious, fps_values, frame_count, ground_truth)
-plot_metrics(ious, fps_values, "MOSSE")
+plot_metrics(ious, fps_values, "Kalman_MOSSE")
