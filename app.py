@@ -17,12 +17,12 @@ st.markdown("""
     <meta property="og:description" content="Interactive demo comparing ICLK, MOSSE, and Mean Shift tracking algorithms for wildlife monitoring. Built with Python, OpenCV, and Streamlit." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://amoghmpanhale-428-project-final.streamlit.app" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_iou.png" />
-    <meta name="description" content="Wildlife tracking project comparing classical CV algorithms - MOSSE (60+ FPS, 0.7+ IoU), Lucas-Kanade, Mean Shift, with Kalman filtering." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_fps.png" />
+    <meta name="description" content="Wildlife tracking project comparing classical CV algorithms - MOSSE (60+ FPS), Lucas-Kanade, Mean Shift, with Kalman filtering." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Wildlife Tracking with Classical Computer Vision" />
     <meta name="twitter:description" content="Interactive demo comparing tracking algorithms for wildlife monitoring" />
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_iou.png" />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_fps.png" />
     """, unsafe_allow_html=True)
 
 # Custom CSS for better styling
@@ -127,9 +127,8 @@ elif page == "Algorithm Demonstrations":
     st.header("Algorithm Demonstrations")
 
     st.markdown("""
-    Select an algorithm and dataset to see the tracking results. The videos show:
-    - **Blue Box**: Ground truth annotation
-    - **Green Box**: Tracker prediction
+    Select an algorithm and dataset to see the tracking results and performance metrics.
+    The videos show the tracker's predictions (green) compared to ground truth annotations (blue).
     """)
 
     # Selection controls
@@ -193,16 +192,16 @@ elif page == "Algorithm Demonstrations":
         col1, col2 = st.columns(2)
 
         with col1:
-            if iou_path.exists():
-                st.subheader("Intersection over Union (IoU)")
-                st.image(str(iou_path), width="stretch")
-                st.caption("Higher IoU indicates better overlap between predicted and ground truth bounding boxes")
-
-        with col2:
             if fps_path.exists():
                 st.subheader("Frames Per Second (FPS)")
                 st.image(str(fps_path), width="stretch")
-                st.caption("Higher FPS indicates faster processing speed")
+                st.caption("Higher FPS indicates faster processing and real-time capability")
+
+        with col2:
+            if iou_path.exists():
+                st.subheader("Tracking Accuracy")
+                st.image(str(iou_path), width="stretch")
+                st.caption("Overlap between predicted and ground truth bounding boxes over time")
     else:
         st.warning(f"Results not available for {algorithm} on {dataset} dataset. Available combinations may be limited to deer dataset.")
         st.info("Try selecting 'Deer' as the dataset to see available results.")
@@ -310,8 +309,8 @@ while True:
         st.markdown("""
         ### Performance Metrics
         In our deer tracking experiments:
-        - Average IoU: ~0.65-0.75
-        - Average FPS: 60-80
+        - Average FPS: 60-80 (real-time performance)
+        - High tracking accuracy on structured movements
         - Success rate: >90% frame-to-frame
         """)
 
@@ -390,7 +389,7 @@ elif page == "Performance Comparison":
         st.markdown('<div class="metric-box">', unsafe_allow_html=True)
         st.markdown("### MOSSE")
         st.markdown("**Best Overall**")
-        st.markdown("IoU: ⭐⭐⭐⭐⭐")
+        st.markdown("Accuracy: ⭐⭐⭐⭐⭐")
         st.markdown("FPS: ⭐⭐⭐⭐⭐")
         st.markdown("Robustness: ⭐⭐⭐⭐")
         st.markdown('</div>', unsafe_allow_html=True)
@@ -399,7 +398,7 @@ elif page == "Performance Comparison":
         st.markdown('<div class="metric-box">', unsafe_allow_html=True)
         st.markdown("### ICLK")
         st.markdown("**Fast & Accurate**")
-        st.markdown("IoU: ⭐⭐⭐⭐")
+        st.markdown("Accuracy: ⭐⭐⭐⭐")
         st.markdown("FPS: ⭐⭐⭐⭐")
         st.markdown("Robustness: ⭐⭐⭐")
         st.markdown('</div>', unsafe_allow_html=True)
@@ -408,7 +407,7 @@ elif page == "Performance Comparison":
         st.markdown('<div class="metric-box">', unsafe_allow_html=True)
         st.markdown("### Mean Shift")
         st.markdown("**Histogram-based**")
-        st.markdown("IoU: ⭐⭐")
+        st.markdown("Accuracy: ⭐⭐")
         st.markdown("FPS: ⭐⭐⭐")
         st.markdown("Robustness: ⭐⭐")
         st.markdown('</div>', unsafe_allow_html=True)
@@ -422,7 +421,7 @@ elif page == "Performance Comparison":
     with col1:
         st.markdown("""
         ### MOSSE Tracker Advantages
-        - Highest average IoU across datasets
+        - Highest tracking accuracy across datasets
         - Real-time performance (60+ FPS)
         - Adaptive correlation filter handles appearance changes
         - Best for animals with distinctive patterns
@@ -455,7 +454,7 @@ elif page == "Performance Comparison":
     The Kalman filter provides:
     - **Trajectory Smoothing**: Reduces jitter in bounding box movement
     - **Brief Occlusion Handling**: Maintains tracking during short failures
-    - **Minor IoU Improvements**: 2-5% increase when base tracker is good
+    - **Improved Accuracy**: Modest improvements when base tracker is good
 
     **Important Note**: Kalman performance is highly dependent on the quality of the underlying tracker.
     The best results come from Kalman + MOSSE combination.
