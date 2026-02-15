@@ -11,6 +11,20 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Add Open Graph meta tags for LinkedIn preview
+st.markdown("""
+    <meta property="og:title" content="Wildlife Tracking with Classical Computer Vision" />
+    <meta property="og:description" content="Interactive demo comparing ICLK, MOSSE, and Mean Shift tracking algorithms for wildlife monitoring. Built with Python, OpenCV, and Streamlit." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://amoghmpanhale-428-project-final.streamlit.app" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_iou.png" />
+    <meta name="description" content="Wildlife tracking project comparing classical CV algorithms - MOSSE (60+ FPS, 0.7+ IoU), Lucas-Kanade, Mean Shift, with Kalman filtering." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Wildlife Tracking with Classical Computer Vision" />
+    <meta name="twitter:description" content="Interactive demo comparing tracking algorithms for wildlife monitoring" />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_iou.png" />
+    """, unsafe_allow_html=True)
+
 # Custom CSS for better styling
 st.markdown("""
     <style>

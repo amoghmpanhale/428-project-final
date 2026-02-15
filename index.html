@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Tracking with Classical Computer Vision</title>
+
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amoghmpanhale.github.io/428-project-final/">
+    <meta property="og:title" content="Wildlife Tracking with Classical Computer Vision">
+    <meta property="og:description" content="Interactive demo comparing ICLK, MOSSE, and Mean Shift tracking algorithms. MOSSE achieved 60+ FPS with 0.7+ IoU on real wildlife datasets.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_iou.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://amoghmpanhale.github.io/428-project-final/">
+    <meta property="twitter:title" content="Wildlife Tracking with Classical Computer Vision">
+    <meta property="twitter:description" content="Interactive demo comparing tracking algorithms for wildlife monitoring">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_iou.png">
+
+    <meta name="description" content="Wildlife tracking project using classical CV algorithms - MOSSE, Lucas-Kanade, Mean Shift, with Kalman filtering. Built with Python and OpenCV.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .metrics {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .metric {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px 30px;
+            border-radius: 10px;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tech-stack {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-stack h3 {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+            }
+
+            .metrics {
+                gap: 20px;
+            }
+
+            .metric-value {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦓 Wildlife Tracking</h1>
+        <p class="subtitle">Classical Computer Vision Algorithms for Automated Wildlife Monitoring</p>
+
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-value">60+</div>
+                <div class="metric-label">FPS</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">0.7+</div>
+                <div class="metric-label">IoU Score</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">3</div>
+                <div class="metric-label">Algorithms</div>
+            </div>
+        </div>
+
+        <p style="margin: 30px 0; font-size: 1.1em; line-height: 1.6;">
+            Comparative analysis of ICLK, MOSSE, and Mean Shift tracking algorithms
+            with Kalman filtering on real-world animal datasets.
+        </p>
+
+        <div class="buttons">
+            <a href="https://amoghmpanhale-428-project-final.streamlit.app" class="btn btn-primary" target="_blank">
+                🚀 View Live Demo
+            </a>
+            <a href="https://github.com/amoghmpanhale/428-project-final" class="btn btn-secondary" target="_blank">
+                💻 View Source Code
+            </a>
+        </div>
+
+        <div class="tech-stack">
+            <h3>Tech Stack</h3>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">NumPy</span>
+                <span class="tag">Matplotlib</span>
+                <span class="tag">Streamlit</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Redirect after 3 seconds (optional)
+        // setTimeout(() => {
+        //     window.location.href = 'https://amoghmpanhale-428-project-final.streamlit.app';
+        // }, 3000);
+    </script>
+</body>
+</html>
