@@ -30,66 +30,58 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: white;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
+            padding: 80px 20px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
+        .hero h1 {
             font-size: 3em;
             margin-bottom: 20px;
-            background: linear-gradient(45deg, #fff, #e0e0e0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .subtitle {
+        .hero .subtitle {
             font-size: 1.3em;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            margin-bottom: 40px;
+            opacity: 0.95;
         }
 
         .metrics {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 60px;
             margin: 40px 0;
             flex-wrap: wrap;
         }
 
         .metric {
             background: rgba(255, 255, 255, 0.15);
-            padding: 20px 30px;
-            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            padding: 30px 40px;
+            border-radius: 15px;
+            min-width: 150px;
         }
 
         .metric-value {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .metric-label {
-            font-size: 0.9em;
-            opacity: 0.8;
+            font-size: 1em;
+            opacity: 0.9;
         }
 
-        .buttons {
+        .hero-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
@@ -105,6 +97,7 @@
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .btn-primary {
@@ -128,54 +121,226 @@
             transform: translateY(-2px);
         }
 
-        .tech-stack {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        /* Content Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .tech-stack h3 {
-            margin-bottom: 15px;
-            opacity: 0.9;
+        section {
+            background: white;
+            margin: 40px 0;
+            padding: 60px 40px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
-        .tags {
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #667eea;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            margin: 30px 0 20px;
+            color: #444;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
             display: flex;
             gap: 10px;
-            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
             flex-wrap: wrap;
         }
 
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1.1em;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            color: #667eea;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Video and Image Display */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .demo-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .demo-item h4 {
+            margin-bottom: 15px;
+            color: #667eea;
+            font-size: 1.3em;
+        }
+
+        .demo-item video {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .demo-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        /* Algorithm Cards */
+        .algorithm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .algorithm-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .algorithm-card h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .stars {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        /* Tech Stack */
+        .tech-tags {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
         .tag {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            font-family: 'Monaco', 'Courier New', monospace;
             font-size: 0.9em;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
+        /* Lists */
+        ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
 
-            .subtitle {
-                font-size: 1.1em;
+        li {
+            margin: 10px 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
             }
 
             .metrics {
                 gap: 20px;
             }
 
-            .metric-value {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            h2 {
                 font-size: 2em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🦓 Wildlife Tracking</h1>
-        <p class="subtitle">Classical Computer Vision Algorithms for Automated Wildlife Monitoring</p>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>🦓 Wildlife Tracking with Classical Computer Vision</h1>
+        <p class="subtitle">Comparative Analysis of Tracking Algorithms for Automated Wildlife Monitoring</p>
 
         <div class="metrics">
             <div class="metric">
@@ -192,37 +357,282 @@
             </div>
         </div>
 
-        <p style="margin: 30px 0; font-size: 1.1em; line-height: 1.6;">
-            Comparative analysis of ICLK, MOSSE, and Mean Shift tracking algorithms
-            with Kalman filtering on real-world animal datasets.
+        <p style="margin: 30px auto; font-size: 1.2em; max-width: 800px;">
+            Comparing ICLK, MOSSE, and Mean Shift tracking algorithms with Kalman filtering
+            on real-world animal datasets from AnimalTrack and Zebra datasets.
         </p>
 
-        <div class="buttons">
-            <a href="https://amoghmpanhale-428-project-final.streamlit.app" class="btn btn-primary" target="_blank">
-                🚀 View Live Demo
-            </a>
-            <a href="https://github.com/amoghmpanhale/428-project-final" class="btn btn-secondary" target="_blank">
-                💻 View Source Code
-            </a>
-        </div>
-
-        <div class="tech-stack">
-            <h3>Tech Stack</h3>
-            <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">OpenCV</span>
-                <span class="tag">NumPy</span>
-                <span class="tag">Matplotlib</span>
-                <span class="tag">Streamlit</span>
-            </div>
+        <div class="hero-buttons">
+            <a href="#demos" class="btn btn-primary">View Demos</a>
+            <a href="https://github.com/amoghmpanhale/428-project-final" class="btn btn-secondary" target="_blank">View Source Code</a>
         </div>
     </div>
 
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>Project Overview</h2>
+            <p style="font-size: 1.1em; text-align: center; max-width: 900px; margin: 0 auto 40px;">
+                This project implements and evaluates classical computer vision tracking algorithms for wildlife monitoring.
+                Developed as part of CMPUT 428 at the University of Alberta.
+            </p>
+
+            <div class="algorithm-grid">
+                <div class="algorithm-card">
+                    <h3>MOSSE Tracker</h3>
+                    <p><strong>Best Overall Performance</strong></p>
+                    <div class="stars">
+                        <div>Accuracy: ⭐⭐⭐⭐⭐</div>
+                        <div>FPS: ⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p>Correlation filter-based approach with 60+ FPS</p>
+                </div>
+
+                <div class="algorithm-card">
+                    <h3>ICLK Tracker</h3>
+                    <p><strong>Fast & Efficient</strong></p>
+                    <div class="stars">
+                        <div>Accuracy: ⭐⭐⭐⭐</div>
+                        <div>FPS: ⭐⭐⭐⭐</div>
+                    </div>
+                    <p>Inverse Compositional Lucas-Kanade</p>
+                </div>
+
+                <div class="algorithm-card">
+                    <h3>Mean Shift</h3>
+                    <p><strong>Histogram-Based</strong></p>
+                    <div class="stars">
+                        <div>Accuracy: ⭐⭐</div>
+                        <div>FPS: ⭐⭐⭐</div>
+                    </div>
+                    <p>Color histogram tracking</p>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin-top: 50px;">Tech Stack</h3>
+            <div class="tech-tags">
+                <span class="tag">Python 3.11</span>
+                <span class="tag">OpenCV 4.11</span>
+                <span class="tag">NumPy</span>
+                <span class="tag">Matplotlib</span>
+            </div>
+        </section>
+
+        <!-- Algorithm Demonstrations -->
+        <section id="demos">
+            <h2>Algorithm Demonstrations</h2>
+
+            <div class="tabs">
+                <button class="tab active" onclick="showDemo('mosse')">MOSSE</button>
+                <button class="tab" onclick="showDemo('iclk')">ICLK</button>
+                <button class="tab" onclick="showDemo('meanshift')">Mean Shift</button>
+                <button class="tab" onclick="showDemo('kalman')">Kalman Filter</button>
+            </div>
+
+            <!-- MOSSE Demo -->
+            <div id="mosse-demo" class="tab-content active">
+                <h3>MOSSE Tracker - Deer Dataset</h3>
+                <p><strong>Best performer with 60+ FPS real-time tracking</strong></p>
+
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <h4>Tracking Video</h4>
+                        <video controls>
+                            <source src="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_tracked_video.mp4" type="video/mp4">
+                            Your browser doesn't support video playback.
+                        </video>
+                        <p><em>Green box: Tracker prediction | Blue box: Ground truth</em></p>
+                    </div>
+
+                    <div class="demo-item">
+                        <h4>Performance Metrics</h4>
+                        <img src="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/mosse_fps.png" alt="MOSSE FPS">
+                        <p><em>FPS over time - consistently above 60 FPS</em></p>
+                    </div>
+                </div>
+
+                <h4>Key Features:</h4>
+                <ul>
+                    <li>Correlation filter-based tracking (Bolme et al., 2010)</li>
+                    <li>Adaptive online learning for appearance changes</li>
+                    <li>Real-time performance: 60-80 FPS</li>
+                    <li>Best for animals with distinctive patterns</li>
+                </ul>
+            </div>
+
+            <!-- ICLK Demo -->
+            <div id="iclk-demo" class="tab-content">
+                <h3>Inverse Compositional Lucas-Kanade - Deer Dataset</h3>
+                <p><strong>Efficient optical flow-based tracking</strong></p>
+
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <h4>Tracking Video</h4>
+                        <video controls>
+                            <source src="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/iclk_tracked_video.mp4" type="video/mp4">
+                            Your browser doesn't support video playback.
+                        </video>
+                        <p><em>Green box: Tracker prediction | Blue box: Ground truth</em></p>
+                    </div>
+
+                    <div class="demo-item">
+                        <h4>Performance Metrics</h4>
+                        <img src="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/iclk_fps.png" alt="ICLK FPS">
+                        <p><em>Consistent performance with good efficiency</em></p>
+                    </div>
+                </div>
+
+                <h4>Implementation Highlights:</h4>
+                <ul>
+                    <li>Based on Baker & Matthews (2004) research</li>
+                    <li>Precomputed gradients and Hessian for efficiency</li>
+                    <li>Iterative optimization until convergence</li>
+                    <li>Works well on textured animals</li>
+                </ul>
+
+                <h4>Code Snippet:</h4>
+                <pre><code>class InverseCompositionalLucasKanadeTracker:
+    def __init__(self, template):
+        # Precompute gradients
+        self.gradient_x = cv2.Sobel(self.T, cv2.CV_32F, 1, 0)
+        self.gradient_y = cv2.Sobel(self.T, cv2.CV_32F, 0, 1)
+
+        # Precompute Hessian inverse
+        self.H = self.steepest_descent.T @ self.steepest_descent
+        self.H_inverse = np.linalg.inv(self.H)</code></pre>
+            </div>
+
+            <!-- Mean Shift Demo -->
+            <div id="meanshift-demo" class="tab-content">
+                <h3>Mean Shift Tracker - Deer Dataset</h3>
+                <p><strong>Histogram-based color tracking</strong></p>
+
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <h4>Tracking Video</h4>
+                        <video controls>
+                            <source src="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/meanshift_tracked_video.mp4" type="video/mp4">
+                            Your browser doesn't support video playback.
+                        </video>
+                        <p><em>Green box: Tracker prediction | Blue box: Ground truth</em></p>
+                    </div>
+
+                    <div class="demo-item">
+                        <h4>Performance Metrics</h4>
+                        <img src="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer/meanshift_fps.png" alt="Mean Shift FPS">
+                        <p><em>Moderate performance, struggles with similar backgrounds</em></p>
+                    </div>
+                </div>
+
+                <h4>Challenges Identified:</h4>
+                <ul>
+                    <li>Struggles when animals travel in groups (similar appearances)</li>
+                    <li>Confusion with similarly-colored backgrounds</li>
+                    <li>Difficulty recovering from occlusions</li>
+                    <li>Less robust than correlation filter approaches</li>
+                </ul>
+            </div>
+
+            <!-- Kalman Filter Demo -->
+            <div id="kalman-demo" class="tab-content">
+                <h3>Kalman Filter Integration</h3>
+                <p><strong>Predictive filtering for smoother trajectories</strong></p>
+
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <h4>Kalman + MOSSE</h4>
+                        <video controls>
+                            <source src="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer_kalman_mosse/kalman_tracked_video.mp4" type="video/mp4">
+                            Your browser doesn't support video playback.
+                        </video>
+                        <p><em>Smoothed tracking with prediction</em></p>
+                    </div>
+
+                    <div class="demo-item">
+                        <h4>Performance</h4>
+                        <img src="https://raw.githubusercontent.com/amoghmpanhale/428-project-final/main/outputs/output_deer_kalman_mosse/kalman_fps.png" alt="Kalman FPS">
+                        <p><em>Slight overhead but improved smoothness</em></p>
+                    </div>
+                </div>
+
+                <h4>Kalman Filter Benefits:</h4>
+                <ul>
+                    <li><strong>Trajectory Smoothing:</strong> Reduces jitter in bounding box movement</li>
+                    <li><strong>Prediction:</strong> Estimates next position based on motion model</li>
+                    <li><strong>Occlusion Handling:</strong> Maintains tracking during brief failures</li>
+                    <li><strong>State Estimation:</strong> Tracks position (x, y) and velocity (vx, vy)</li>
+                </ul>
+
+                <p><em>Note: Kalman performance is highly dependent on the base tracker quality.</em></p>
+            </div>
+        </section>
+
+        <!-- Key Findings -->
+        <section id="findings">
+            <h2>Key Findings</h2>
+
+            <h3>Performance Comparison</h3>
+            <ul>
+                <li><strong>MOSSE:</strong> Best overall with highest accuracy and FPS (60-80 FPS)</li>
+                <li><strong>ICLK:</strong> Close second, efficient with precomputation</li>
+                <li><strong>Mean Shift:</strong> Limited by color histogram approach, struggles with groups</li>
+                <li><strong>Kalman:</strong> Provides 2-5% improvements with smoothing</li>
+            </ul>
+
+            <h3>Future Work</h3>
+            <ul>
+                <li>Implement hybrid meta-tracker combining multiple algorithms</li>
+                <li>Integrate YOLO for detection and re-identification</li>
+                <li>Add failure detection using Peak-to-Sidelobe Ratio (PSR)</li>
+                <li>Explore KCF and other correlation filter variants</li>
+                <li>Implement long-term re-identification strategies</li>
+            </ul>
+
+            <h3>References</h3>
+            <ol>
+                <li>Bolme et al. (2010) - "Visual object tracking using adaptive correlation filters"</li>
+                <li>Baker & Matthews (2004) - "Lucas-kanade 20 years on: A unifying framework"</li>
+                <li>Comaniciu et al. (2000) - "Real-time tracking of non-rigid objects using mean shift"</li>
+                <li>Zhang et al. (2023) - "AnimalTrack: A benchmark for multi-animal tracking in the wild"</li>
+            </ol>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Wildlife Tracking with Classical Computer Vision</strong></p>
+        <p>CMPUT 428 Final Project | University of Alberta | 2025</p>
+        <p>Implemented by Amogh Panhale</p>
+        <p style="margin-top: 20px;">
+            <a href="https://github.com/amoghmpanhale/428-project-final" target="_blank">GitHub Repository</a> |
+            <a href="https://www.linkedin.com/in/amogh-panhale/" target="_blank">LinkedIn</a>
+        </p>
+    </footer>
+
     <script>
-        // Redirect after 3 seconds (optional)
-        // setTimeout(() => {
-        //     window.location.href = 'https://amoghmpanhale-428-project-final.streamlit.app';
-        // }, 3000);
+        function showDemo(demoName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected demo
+            document.getElementById(demoName + '-demo').classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Pause all videos
+            document.querySelectorAll('video').forEach(video => {
+                video.pause();
+            });
+        }
     </script>
 </body>
 </html>
