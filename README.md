@@ -1,5 +1,12 @@
-# 428-project-final
-This repository contains some of the code for the cmput 428 project for wildlife monitoring. This project implements various wildlife tracking algorithms and compares them to each other on the animal data in the data folder.
+# Wildlife Tracking with Classical Computer Vision
+
+This repository contains implementations of classical computer vision tracking algorithms for wildlife monitoring. This project was developed as part of CMPUT 428 at the University of Alberta.
+
+## 🌐 Live Demo
+
+**[View Interactive Demo →](your-streamlit-url-here)**
+
+Explore the tracking algorithms, see performance comparisons, and understand the technical details through an interactive web interface.
 
 ## Project Structure
 The contents of this repository are organized as is decribed below:
@@ -11,7 +18,21 @@ The contents of this repository are organized as is decribed below:
 - `README.md`: You are here!
 
 ## Installation
-To setup this repository on your personal system, follow the steps below.
+
+### For Running the Web Demo
+```bash
+# Clone the repository
+git clone https://github.com/your-username/428-project-final.git
+cd 428-project-final
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the interactive demo
+streamlit run app.py
+```
+
+### For Running Trackers Locally
 1. Clone the repository
 2. Install the required python packages using `pip install -r requirements.txt`
 
@@ -50,6 +71,23 @@ multi-animal tracking in the wild. International Journal of Computer Vision, 131
 8. https://github.com/zziz/kalman-filter
 9. https://github.com/Blarc/mean-shift-tracking
 10. Code from the UAlberta CMPUT 428 Assignments and LAbs was also used
+
+## Web Demo
+
+This repository includes an interactive Streamlit web application that showcases the tracking algorithms.
+
+**Features:**
+- Algorithm demonstrations with side-by-side comparisons
+- Performance metrics visualization (IoU, FPS)
+- Technical explanations of each algorithm
+- Interactive algorithm selection
+
+**Quick Start:**
+```bash
+streamlit run app.py
+```
+
+**Deployment Guide:** See [QUICKSTART.md](QUICKSTART.md) for deployment instructions to Streamlit Cloud, Railway, or other platforms.
 
 ## AI Tool Use Acknowledgement
 In the creation of this project I did make use of the language model Claude to aid with detecting typos, and with formatting comments. The code in this repository was written by me though.

@@ -1,14 +1,15 @@
 # iclk.py
 
 '''
-This script contains a class for the implementation of the translational Inverse Compositional Lucas Kanade Tracker. This implementation is based on the Baker and Simon Paper.
+This script contains a class for the implementation of the translational Inverse Compositional Lucas Kanade Tracker. 
+This implementation is based on the Baker and Simon Paper.
 '''
 
 import numpy as np
 import cv2
 
 class InverseCompositionalLucasKanadeTracker:
-    def __init__(self, template, threshold=0.00001, max_iters=200):
+    def __init__(self, template, threshold=0.0001, max_iters=30):
         '''
         The initialization of the tracker. This step involves precomputation of the jacobian and hessian of the template. It comes from pages 12 to 13 of the paper.
         '''

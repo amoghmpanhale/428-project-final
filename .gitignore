@@ -20,3 +20,33 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+### Python ###
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.DS_Store
+
+### Project Specific - Large Files Not Needed for Web Demo ###
+# Samurai directory (587MB - not needed for demo)
+samurai/
+
+# Source data videos (keep ground truth .txt files)
+data/**/*.mp4
+# But keep the outputs directory for demo
+!outputs/**/*.mp4
+
+# Temp files
+temp.py
+temp2.py
+temp3.py
+output_directory_penguin/
+convert_videos_for_web.py
+
+# Original video backups (created during web conversion)
+*.original
